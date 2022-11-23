@@ -1,0 +1,467 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>prototype2</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-11-22"><meta name="DC.source" content="prototype2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Add a pen link to the robot / &#12506;&#12531;&#65288;&#12522;&#12531;&#12463;&#65289;&#12398;&#36861;&#21152;</a></li><li><a href="#3">Visualize the planned path / &#32076;&#36335;&#12398;&#34920;&#31034;</a></li><li><a href="#4">Enhance the focused path / &#22659;&#30028;&#12398;1&#12388;&#12434;&#24375;&#35519;</a></li><li><a href="#5">Solve the inverse kinematics / &#12452;&#12531;&#12496;&#12540;&#12473;&#12461;&#12493;&#12510;&#12486;&#12451;&#12463;&#12473;&#12434;&#35336;&#31639;</a></li><li><a href="#7">Show the path with the calculated joint angles / &#12472;&#12519;&#12452;&#12531;&#12488;&#35282;&#24230;&#12398;&#30906;&#35469;</a></li><li><a href="#8">Visualization / &#12450;&#12491;&#12513;&#12540;&#12471;&#12519;&#12531;&#34920;&#31034;</a></li><li><a href="#10">Copyright 2018 The MathWorks, Inc.</a></li></ul></div><pre class="codeinput">clc;
+clear;
+I = imread(<span class="string">'C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\MAE 547\Project\leo.jpg'</span>);
+
+imshow(I)
+
+
+
+[BW,thre] = edge(rgb2gray(I),<span class="string">'Canny'</span>,[0.0813 0.1281]); <span class="comment">%&#12456;&#12483;&#12472;&#26908;&#20986;</span>
+<span class="comment">%figure, imshow(BW);</span>
+
+BW2 = bwmorph(BW,<span class="string">'skel'</span>,Inf);
+<span class="comment">%figure, imshow(BW2);</span>
+
+BW3 = bwmorph(BW2,<span class="string">'spur'</span>,3);
+<span class="comment">%figure, imshow(BW3);</span>
+
+branchPoints = bwmorph(BW3,<span class="string">'branch'</span>,1); <span class="comment">%&#26525;&#20998;&#12363;&#12428;&#20301;&#32622;&#12398;&#26908;&#20986;</span>
+branchPoints = imdilate(branchPoints,strel(<span class="string">'disk'</span>,1));
+BW3 = BW3 &amp; ~branchPoints;
+<span class="comment">%figure, imshow(BW3)</span>
+
+BWseg = bwareaopen(BW3,10);
+<span class="comment">%figure, imshow(BWseg)</span>
+[B,L] = bwboundaries(BWseg,<span class="string">'noholes'</span>);
+imshow(label2rgb(L, @jet, [.5 .5 .5]))
+hold <span class="string">on</span>
+<span class="keyword">for</span> k = 1:length(B)
+   boundary = B{k};
+   plot(boundary(:,2), boundary(:,1), <span class="string">'LineWidth'</span>, 3)
+<span class="keyword">end</span>
+
+boundary = B{18};
+edgeind = find(all(circshift(boundary,1)==circshift(boundary,-1),2),1)
+boundary = circshift(boundary,-edgeind+1);
+boundary = boundary(1:ceil(end/2),:)
+
+<span class="keyword">for</span> i = 1:length(B)
+    boundary = B{i};
+    edgeind = find(all(circshift(boundary,1)==circshift(boundary,-1),2),1);
+    <span class="keyword">if</span> ~isempty(edgeind)
+        boundary = circshift(boundary,-edgeind+1);
+        boundary = boundary(1:ceil(end/2),:);
+    <span class="keyword">end</span>
+    B{i} = boundary;
+<span class="keyword">end</span>
+imshow(label2rgb(L, @jet, [.5 .5 .5]))
+hold <span class="string">on</span>
+<span class="keyword">for</span> k = 1:length(B)
+   boundary = B{k};
+   plot(boundary(:,2), boundary(:,1), <span class="string">'LineWidth'</span>, 3)
+<span class="keyword">end</span>
+
+origin = [0 0]; <span class="comment">% &#30011;&#20687;&#12398;&#21407;&#28857;&#12398;&#20301;&#32622;</span>
+delta = 0.001; <span class="comment">% 1&#12500;&#12463;&#12475;&#12523;&#12398;&#38263;&#12373;</span>
+B2 = B;
+figure;
+<span class="keyword">for</span> i = 1:length(B)
+    b = B{i};
+    bx = -b(:,2)*delta+origin(1);
+    by = b(:,1)*delta+origin(2);
+    bz = zeros(length(bx),1);
+    B2{i} = [bx by bz];
+    plot3(bx,by,bz); hold <span class="string">on</span>;
+<span class="keyword">end</span>
+grid <span class="string">on</span>;
+
+b_ = B2{1};
+
+b=0.2*b_';
+
+
+
+<span class="comment">%traj = mstraj(b(:,2:end)', [0.5 0.5 0.5], [], b(:,1)',	0.02, 0.2);</span>
+<span class="comment">%Tp=  SE3(traj) * SE3.oa( [0 1 0], [0 0 -1]);</span>
+<span class="comment">%mdl_puma560</span>
+
+<span class="comment">%q = p560.ikine6s(Tp);</span>
+<span class="comment">% plotp(traj)</span>
+<span class="comment">%p560.plot(q)</span>
+figure;
+mikata_arm_4;
+robot = importrobot(<span class="string">'mikata_arm_4.urdf'</span>,<span class="string">'MeshPath'</span>,<span class="string">'.'</span>);
+Q = robot.homeConfiguration;
+robot.show(Q,<span class="string">'preservePlot'</span>,false,<span class="string">'Frames'</span>,<span class="string">'off'</span>);
+set(gca,<span class="string">'CameraPosition'</span>,[7.6740 10.6196 11.3315],<span class="keyword">...</span>
+          <span class="string">'CameraTarget'</span>,[0.0292 -0.0476 0.0280],<span class="keyword">...</span>
+          <span class="string">'CameraUpVector'</span>,[0 0 1],<span class="string">'CameraViewAngle'</span>,1.3394,<span class="keyword">...</span>
+          <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="string">'Projection'</span>,<span class="string">'perspective'</span>);
+</pre><pre class="codeoutput">
+edgeind =
+
+    23
+
+
+boundary =
+
+    83   145
+    83   144
+    83   143
+    83   142
+    83   141
+    82   140
+    82   139
+    82   138
+    82   137
+    82   136
+    82   135
+    82   134
+    82   133
+    82   132
+    82   131
+    82   130
+    82   129
+    82   128
+    83   127
+    83   126
+    83   125
+    83   124
+    83   123
+
+</pre><img vspace="5" hspace="5" src="prototype2_01.png" alt=""> <img vspace="5" hspace="5" src="prototype2_02.png" alt=""> <h2 id="2">Add a pen link to the robot / &#12506;&#12531;&#65288;&#12522;&#12531;&#12463;&#65289;&#12398;&#36861;&#21152;</h2><pre class="codeinput">robot = mikata_arm_4;
+pen = robotics.RigidBody(<span class="string">'pen'</span>);
+penjnt = robotics.Joint(<span class="string">'penjnt'</span>,<span class="string">'fixed'</span>);
+dhparam = [0 0 -0.09 0]; <span class="comment">% DH&#12497;&#12521;&#12513;&#12540;&#12479;</span>
+setFixedTransform(penjnt,dhparam,<span class="string">'dh'</span>);
+pen.Joint = penjnt;
+addBody(robot,pen,<span class="string">'target_link'</span>);
+robot.show(Q,<span class="string">'preservePlot'</span>,false,<span class="string">'Frames'</span>,<span class="string">'off'</span>,<span class="string">'Parent'</span>,gca);
+lineobj = findobj(<span class="string">'Type'</span>,<span class="string">'Line'</span>);
+set(lineobj(1),<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+<span class="comment">%&#24231;&#27161;&#36600;&#12398;&#35519;&#25972;</span>
+set(gca,<span class="string">'CameraPosition'</span>,[7.6740 10.6196 11.3315],<span class="keyword">...</span>
+          <span class="string">'CameraTarget'</span>,[0.0292 -0.0476 0.0280],<span class="keyword">...</span>
+          <span class="string">'CameraUpVector'</span>,[0 0 1],<span class="string">'CameraViewAngle'</span>,1.3394,<span class="keyword">...</span>
+          <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="string">'Projection'</span>,<span class="string">'perspective'</span>);
+hold <span class="string">on</span>;
+figure(gcf);
+</pre><img vspace="5" hspace="5" src="prototype2_03.png" alt=""> <h2 id="3">Visualize the planned path / &#32076;&#36335;&#12398;&#34920;&#31034;</h2><pre class="codeinput"><span class="keyword">for</span> i = 1:length(B2)
+    b = B2{i};
+    plot3(b(:,1),b(:,2),b(:,3)); hold <span class="string">on</span>;
+<span class="keyword">end</span>
+figure(gcf);
+</pre><img vspace="5" hspace="5" src="prototype2_04.png" alt=""> <h2 id="4">Enhance the focused path / &#22659;&#30028;&#12398;1&#12388;&#12434;&#24375;&#35519;</h2><h2 id="5">Solve the inverse kinematics / &#12452;&#12531;&#12496;&#12540;&#12473;&#12461;&#12493;&#12510;&#12486;&#12451;&#12463;&#12473;&#12434;&#35336;&#31639;</h2><p>&#21516;&#27425;&#24231;&#27161;&#34892;&#21015;&#12434;&#20316;&#25104;</p><pre class="codeinput"><span class="keyword">for</span> i=length(B2):1
+</pre><pre class="codeinput">    temp = B2{i}
+b = temp;
+tf = makehgtform(<span class="string">'translate'</span>,b(1,:))
+plot3(b(:,1),b(:,2),b(:,3),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,3);
+figure(gcf);
+<span class="comment">% &#12452;&#12531;&#12496;&#12540;&#12473;&#12461;&#12493;&#12510;&#12486;&#12451;&#12463;&#12473;&#12398;&#35336;&#31639;</span>
+ik = robotics.InverseKinematics(<span class="string">'RigidBodyTree'</span>,robot);
+[Q,~] = ik(<span class="string">'pen'</span>,tf,[1 1 0 1 1 1],Q);
+<span class="comment">% &#12472;&#12519;&#12452;&#12531;&#12488;&#12398;&#35282;&#24230;&#12398;&#20516;</span>
+bJoint = arrayfun(@(x) x.JointPosition,Q)
+</pre><h2 id="7">Show the path with the calculated joint angles / &#12472;&#12519;&#12452;&#12531;&#12488;&#35282;&#24230;&#12398;&#30906;&#35469;</h2><pre class="codeinput">robot.show(Q,<span class="string">'preservePlot'</span>,false,<span class="string">'Frames'</span>,<span class="string">'off'</span>,<span class="string">'Parent'</span>,gca);
+lineobj = findobj(<span class="string">'Type'</span>,<span class="string">'Line'</span>);
+set(lineobj(1),<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+figure(gcf);
+</pre><h2 id="8">Visualization / &#12450;&#12491;&#12513;&#12540;&#12471;&#12519;&#12531;&#34920;&#31034;</h2><pre class="codeinput">figure(gcf)
+<span class="keyword">for</span> i=1:size(b,1)
+  pose = [eye(3) b(i,:)';
+      zeros(1,3) 1;];
+  [Q,~] = ik(<span class="string">'pen'</span>,pose,[1 1 0 1 1 1],Q);
+  robot.show(Q,<span class="string">'preservePlot'</span>,false,<span class="string">'Frames'</span>,<span class="string">'off'</span>,<span class="string">'Parent'</span>,gca);
+  lineobj = findobj(<span class="string">'Type'</span>,<span class="string">'Line'</span>);
+  set(lineobj(1),<span class="string">'Visible'</span>,<span class="string">'on'</span>);
+  drawnow;
+<span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+</pre><h2 id="10">Copyright 2018 The MathWorks, Inc.</h2><pre class="codeinput"><span class="keyword">function</span> robot = mikata_arm_4()
+<span class="keyword">if</span> ~exist(<span class="string">'mikata_arm_4.urdf'</span>,<span class="string">'file'</span>)
+    disp(<span class="string">'Downloading the URDF and STL files for Mikata Arm...'</span>);
+    websave(<span class="string">'mikata_arm_4.urdf'</span>,<span class="string">'https://raw.githubusercontent.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/master/mikata_arm_description/urdf/mikata_arm_4.urdf'</span>);
+    websave(<span class="string">'mikata_arm_4_gripper.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_gripper.stl'</span>);
+    websave(<span class="string">'mikata_arm_4_joint1.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint1.stl'</span>);
+    websave(<span class="string">'mikata_arm_4_joint2.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint2.stl'</span>);
+    websave(<span class="string">'mikata_arm_4_joint3.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint3.stl'</span>);
+    websave(<span class="string">'mikata_arm_4_joint4.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint4.stl'</span>);
+    websave(<span class="string">'mikata_arm_4_joint5.stl'</span>,<span class="string">'https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint5.stl'</span>);
+    disp(<span class="string">'Done.'</span>);
+<span class="keyword">end</span>
+robot = importrobot(<span class="string">'mikata_arm_4.urdf'</span>,<span class="string">'MeshPath'</span>,pwd);
+<span class="comment">% Fix joint limits for the right gipper</span>
+robot.Bodies{6}.Joint.PositionLimits = <span class="keyword">...</span>
+    [-robot.Bodies{6}.Joint.PositionLimits(2),<span class="keyword">...</span>
+    robot.Bodies{6}.Joint.PositionLimits(1)];
+<span class="comment">% Add dummy link</span>
+body1 = robotics.RigidBody(<span class="string">'dummy_link'</span>);
+jnt1 = robotics.Joint(<span class="string">'dummy_joint'</span>);
+tform = trvec2tform([.04225 0 0]); <span class="comment">% User defined</span>
+setFixedTransform(jnt1,tform);
+body1.Joint = jnt1;
+addBody(robot,body1,<span class="string">'link_5'</span>);
+<span class="comment">% Add end effector</span>
+body2 = robotics.RigidBody(<span class="string">'end_effector'</span>);
+jnt2 = robotics.Joint(<span class="string">'end_effector_joint'</span>);
+body2.Joint = jnt2;
+addBody(robot,body2,<span class="string">'dummy_link'</span>);
+<span class="comment">% Add virtual target position</span>
+body1 = robotics.RigidBody(<span class="string">'target_link'</span>);
+jnt1 = robotics.Joint(<span class="string">'target_joint'</span>);
+tform = trvec2tform([.093 0 0]); <span class="comment">% User defined</span>
+setFixedTransform(jnt1,tform);
+body1.Joint = jnt1;
+addBody(robot,body1,<span class="string">'dummy_link'</span>);
+<span class="keyword">end</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clc;
+clear;
+I = imread('C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\MAE 547\Project\leo.jpg');
+
+imshow(I)
+
+
+
+[BW,thre] = edge(rgb2gray(I),'Canny',[0.0813 0.1281]); %エッジ検出
+%figure, imshow(BW);
+
+BW2 = bwmorph(BW,'skel',Inf);
+%figure, imshow(BW2);
+
+BW3 = bwmorph(BW2,'spur',3);
+%figure, imshow(BW3);
+
+branchPoints = bwmorph(BW3,'branch',1); %枝分かれ位置の検出
+branchPoints = imdilate(branchPoints,strel('disk',1));
+BW3 = BW3 & ~branchPoints;
+%figure, imshow(BW3)
+
+BWseg = bwareaopen(BW3,10);
+%figure, imshow(BWseg)
+[B,L] = bwboundaries(BWseg,'noholes');
+imshow(label2rgb(L, @jet, [.5 .5 .5]))
+hold on
+for k = 1:length(B)
+   boundary = B{k};
+   plot(boundary(:,2), boundary(:,1), 'LineWidth', 3)
+end
+
+boundary = B{18};
+edgeind = find(all(circshift(boundary,1)==circshift(boundary,-1),2),1)
+boundary = circshift(boundary,-edgeind+1);
+boundary = boundary(1:ceil(end/2),:)
+
+for i = 1:length(B)
+    boundary = B{i};
+    edgeind = find(all(circshift(boundary,1)==circshift(boundary,-1),2),1);
+    if ~isempty(edgeind)
+        boundary = circshift(boundary,-edgeind+1);
+        boundary = boundary(1:ceil(end/2),:);
+    end
+    B{i} = boundary;
+end
+imshow(label2rgb(L, @jet, [.5 .5 .5]))
+hold on
+for k = 1:length(B)
+   boundary = B{k};
+   plot(boundary(:,2), boundary(:,1), 'LineWidth', 3)
+end
+
+origin = [0 0]; % 画像の原点の位置
+delta = 0.001; % 1ピクセルの長さ
+B2 = B;
+figure;
+for i = 1:length(B)
+    b = B{i};
+    bx = -b(:,2)*delta+origin(1);
+    by = b(:,1)*delta+origin(2);
+    bz = zeros(length(bx),1);
+    B2{i} = [bx by bz];
+    plot3(bx,by,bz); hold on;
+end
+grid on;
+
+b_ = B2{1};
+
+b=0.2*b_';
+
+
+
+%traj = mstraj(b(:,2:end)', [0.5 0.5 0.5], [], b(:,1)',	0.02, 0.2);
+%Tp=  SE3(traj) * SE3.oa( [0 1 0], [0 0 -1]);
+%mdl_puma560
+
+%q = p560.ikine6s(Tp);
+% plotp(traj)
+%p560.plot(q) 
+figure;
+mikata_arm_4;
+robot = importrobot('mikata_arm_4.urdf','MeshPath','.');
+Q = robot.homeConfiguration;
+robot.show(Q,'preservePlot',false,'Frames','off');
+set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
+          'CameraTarget',[0.0292 -0.0476 0.0280],...
+          'CameraUpVector',[0 0 1],'CameraViewAngle',1.3394,...
+          'DataAspectRatio',[1 1 1],'Projection','perspective');
+        
+%% Add a pen link to the robot / ペン（リンク）の追加
+robot = mikata_arm_4;
+pen = robotics.RigidBody('pen');
+penjnt = robotics.Joint('penjnt','fixed');
+dhparam = [0 0 -0.09 0]; % DHパラメータ
+setFixedTransform(penjnt,dhparam,'dh');
+pen.Joint = penjnt;
+addBody(robot,pen,'target_link');
+robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca);
+lineobj = findobj('Type','Line');
+set(lineobj(1),'Visible','on');
+%座標軸の調整
+set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
+          'CameraTarget',[0.0292 -0.0476 0.0280],...
+          'CameraUpVector',[0 0 1],'CameraViewAngle',1.3394,...
+          'DataAspectRatio',[1 1 1],'Projection','perspective');
+hold on;
+figure(gcf);
+%% Visualize the planned path / 経路の表示
+for i = 1:length(B2)
+    b = B2{i};
+    plot3(b(:,1),b(:,2),b(:,3)); hold on;
+end
+figure(gcf);
+%% Enhance the focused path / 境界の1つを強調
+
+%% Solve the inverse kinematics / インバースキネマティクスを計算
+% 同次座標行列を作成
+for i=length(B2):1
+    temp = B2{i}
+b = temp;    
+tf = makehgtform('translate',b(1,:))
+plot3(b(:,1),b(:,2),b(:,3),'b','LineWidth',3);
+figure(gcf);    
+% インバースキネマティクスの計算
+ik = robotics.InverseKinematics('RigidBodyTree',robot);
+[Q,~] = ik('pen',tf,[1 1 0 1 1 1],Q);
+% ジョイントの角度の値
+bJoint = arrayfun(@(x) x.JointPosition,Q)
+%% Show the path with the calculated joint angles / ジョイント角度の確認
+robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca);
+lineobj = findobj('Type','Line');
+set(lineobj(1),'Visible','on');
+figure(gcf);
+%% Visualization / アニメーション表示
+figure(gcf)
+for i=1:size(b,1)
+  pose = [eye(3) b(i,:)';
+      zeros(1,3) 1;];
+  [Q,~] = ik('pen',pose,[1 1 0 1 1 1],Q);
+  robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca);
+  lineobj = findobj('Type','Line');
+  set(lineobj(1),'Visible','on');
+  drawnow;
+end
+end
+%% Copyright 2018 The MathWorks, Inc.
+
+
+function robot = mikata_arm_4()
+if ~exist('mikata_arm_4.urdf','file')
+    disp('Downloading the URDF and STL files for Mikata Arm...');
+    websave('mikata_arm_4.urdf','https://raw.githubusercontent.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/master/mikata_arm_description/urdf/mikata_arm_4.urdf');
+    websave('mikata_arm_4_gripper.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_gripper.stl');
+    websave('mikata_arm_4_joint1.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint1.stl');
+    websave('mikata_arm_4_joint2.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint2.stl');
+    websave('mikata_arm_4_joint3.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint3.stl');
+    websave('mikata_arm_4_joint4.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint4.stl');
+    websave('mikata_arm_4_joint5.stl','https://github.com/ROBOTIS-JAPAN-GIT/dynamixel_mikata_arm/raw/master/mikata_arm_description/meshes/mikata_arm_4_joint5.stl');
+    disp('Done.');
+end
+robot = importrobot('mikata_arm_4.urdf','MeshPath',pwd);
+% Fix joint limits for the right gipper
+robot.Bodies{6}.Joint.PositionLimits = ...
+    [-robot.Bodies{6}.Joint.PositionLimits(2),...
+    robot.Bodies{6}.Joint.PositionLimits(1)];
+% Add dummy link
+body1 = robotics.RigidBody('dummy_link');
+jnt1 = robotics.Joint('dummy_joint');
+tform = trvec2tform([.04225 0 0]); % User defined
+setFixedTransform(jnt1,tform);
+body1.Joint = jnt1;
+addBody(robot,body1,'link_5');
+% Add end effector
+body2 = robotics.RigidBody('end_effector');
+jnt2 = robotics.Joint('end_effector_joint');
+body2.Joint = jnt2;
+addBody(robot,body2,'dummy_link');
+% Add virtual target position
+body1 = robotics.RigidBody('target_link');
+jnt1 = robotics.Joint('target_joint');
+tform = trvec2tform([.093 0 0]); % User defined
+setFixedTransform(jnt1,tform);
+body1.Joint = jnt1;
+addBody(robot,body1,'dummy_link');
+end
+
+
+##### SOURCE END #####
+--></body></html>

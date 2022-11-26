@@ -82,12 +82,8 @@ b=0.2*b_';
 % plotp(traj)
 %p560.plot(q) 
 figure;
-L1 = 0.2;
-L2 = -0.15;
-L3 = -0.15;
-L4 = -0.05;
 
-robot = Drawing_arm(L1,L2,L3,L4);
+robot = Draw_Arm;
 Q = robot.homeConfiguration;
 robot.show(Q,'preservePlot',false,'Frames','on');
 set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
@@ -95,13 +91,13 @@ set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
           'CameraUpVector',[0 0 1],'CameraViewAngle',1.3394,...
           'DataAspectRatio',[1 1 1],'Projection','perspective');
 
-robot = Drawing_arm(L1,L2,L3,L4);
+robot = Draw_Arm;
 pen = robotics.RigidBody('pen');
 penjnt = robotics.Joint('penjnt','fixed');
-dhparam = [0 0 -0.09 0]; % DH
+dhparam = [0 -0.09 0 0]; % DHパラメータ
 setFixedTransform(penjnt,dhparam,'dh');
 pen.Joint = penjnt;
-addBody(robot,pen,'endeffector');
+addBody(robot,pen,'target_link');
 robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
 lineobj = findobj('Type','Line');
 set(lineobj(1),'Visible','on');

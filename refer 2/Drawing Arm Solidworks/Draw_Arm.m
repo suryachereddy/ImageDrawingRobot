@@ -1,6 +1,6 @@
 function robot = Draw_Arm()
 
-robot = importrobot('Draw_armV3.urdf','MeshPath',pwd);
+robot = importrobot('Draw_armV4.urdf','MeshPath',pwd);
 
 % % Fix joint limits for the right gipper
 % robot.Bodies{6}.Joint.PositionLimits = ...

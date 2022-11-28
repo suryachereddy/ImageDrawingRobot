@@ -33,7 +33,7 @@ for k = 1:length(B)
    %plot(boundary(:,2), boundary(:,1), 'LineWidth', 3)
 end
 
-boundary = B{18};
+boundary = B{end}; % Changed this so that it would work with More images
 edgeind = find(all(circshift(boundary,1)==circshift(boundary,-1),2),1)
 boundary = circshift(boundary,-edgeind+1);
 boundary = boundary(1:ceil(end/2),:)
@@ -82,27 +82,17 @@ b=0.2*b_';
 % plotp(traj)
 %p560.plot(q) 
 figure;
-L1 = 0.2;
-L2 = -0.15;
-L3 = -0.15;
-L4 = -0.05;
-
-robot = Drawing_arm(L1,L2,L3,L4);
+robot = Draw_Arm;
 Q = robot.homeConfiguration;
-robot.show(Q,'preservePlot',false,'Frames','on');
+robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
 set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
           'CameraTarget',[0.0292 -0.0476 0.0280],...
           'CameraUpVector',[0 0 1],'CameraViewAngle',1.3394,...
           'DataAspectRatio',[1 1 1],'Projection','perspective');
 
-robot = Drawing_arm(L1,L2,L3,L4);
-pen = robotics.RigidBody('pen');
-penjnt = robotics.Joint('penjnt','fixed');
-dhparam = [0 0 -0.09 0]; % DH
-setFixedTransform(penjnt,dhparam,'dh');
-pen.Joint = penjnt;
-addBody(robot,pen,'endeffector');
-robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
+
+robot = Draw_Arm;
+robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
 lineobj = findobj('Type','Line');
 set(lineobj(1),'Visible','on');
 
@@ -123,18 +113,17 @@ figure(gcf);
 
 
 for j=length(B2):-1:1
-     temp = B2{j}
+    temp = B2{j};
     b = temp;    
     
-    tf = makehgtform('translate',b(1,:))
-    
+    tf = makehgtform('translate',b(1,:));
 
     plot3(b(:,1),b(:,2),b(:,3),'b','LineWidth',3);
     figure(gcf);    
     ik = robotics.InverseKinematics('RigidBodyTree',robot);
-    [Q,~] = ik('pen',tf,[1 1 0 1 1 1],Q);
-    bJoint = arrayfun(@(x) x.JointPosition,Q)
-    robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
+    [Q,~] = ik('tip',tf,[1 1 0 1 1 1],Q);
+    bJoint = arrayfun(@(x) x.JointPosition,Q);
+    robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
     lineobj = findobj('Type','Line');
     set(lineobj(1),'Visible','on');
     figure(gcf);
@@ -144,8 +133,8 @@ for j=length(B2):-1:1
     for i=1:size(b,1)
       pose = [eye(3) b(i,:)';
           zeros(1,3) 1;];
-      [Q,~] = ik('pen',pose,[1 1 0 1 1 1],Q);
-      robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
+      [Q,~] = ik('tip',pose,[1 1 0 1 1 1],Q);
+      robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
       lineobj = findobj('Type','Line');
       set(lineobj(1),'Visible','on');
       drawnow;

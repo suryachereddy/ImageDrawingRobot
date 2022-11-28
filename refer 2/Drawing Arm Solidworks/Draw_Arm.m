@@ -1,6 +1,6 @@
 function robot = Draw_Arm()
 
-robot = importrobot('Draw_armV4.urdf','MeshPath',pwd);
+robot = importrobot('Draw_armV6.urdf','MeshPath',pwd);
 
 % % Fix joint limits for the right gipper
 % robot.Bodies{6}.Joint.PositionLimits = ...
@@ -8,12 +8,12 @@ robot = importrobot('Draw_armV4.urdf','MeshPath',pwd);
 %     robot.Bodies{6}.Joint.PositionLimits(1)];
 
 % Add dummy link
-body1 = robotics.RigidBody('dummy_link');
+dummy = robotics.RigidBody('dummy_link');
 jnt1 = robotics.Joint('dummy_joint');
 tform = trvec2tform([.05 0 0]); % User defined
 setFixedTransform(jnt1,tform);
-body1.Joint = jnt1;
-addBody(robot,body1,'body4');
+dummy.Joint = jnt1;
+addBody(robot,dummy,'body4');
 
 % % Add end effector
 % body2 = robotics.RigidBody('end_effector');
@@ -22,12 +22,20 @@ addBody(robot,body1,'body4');
 % addBody(robot,body2,'dummy_link');
 
 % Add virtual target position
-body1 = robotics.RigidBody('target_link');
+dummy = robotics.RigidBody('target_link');
 jnt1 = robotics.Joint('target_joint');
 tform = trvec2tform([0 0 0]); % User defined
 setFixedTransform(jnt1,tform);
-body1.Joint = jnt1;
-addBody(robot,body1,'dummy_link');
+dummy.Joint = jnt1;
+addBody(robot,dummy,'dummy_link');
 
+tip = robotics.RigidBody('tip');
+tipjnt = robotics.Joint('tipjnt','fixed');
+tform = trvec2tform([0 0 -0.09]);
+setFixedTransform(tipjnt,tform);
+tip.Joint = tipjnt;
+addBody(robot,tip,'target_link');
+
+%show(robot,randomConfiguration(robot));
 show(robot)
 end

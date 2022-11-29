@@ -3,7 +3,7 @@
 clc;
 clear;
 
-I = imread('C:\Users\divya\Pictures\leo.jpg');
+I = imread("C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\refer\leo.jpg");
 
 imshow(I)
 
@@ -64,7 +64,7 @@ for i = 1:length(B)
     by = b(:,1)*delta+origin(2);
     bz = zeros(length(bx),1);
     B2{i} = [bx by bz];
-    %plot3(bx,by,bz); hold on;
+    plot3(bx,by,bz); hold on;
 end
 grid on;
 
@@ -87,7 +87,7 @@ L2 = -0.15;
 L3 = -0.15;
 L4 = -0.05;
 
-robot = Drawing_arm(L1,L2,L3,L4);
+robot = Draw_Arm;
 Q = robot.homeConfiguration;
 robot.show(Q,'preservePlot',false,'Frames','on');
 set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
@@ -95,13 +95,13 @@ set(gca,'CameraPosition',[7.6740 10.6196 11.3315],...
           'CameraUpVector',[0 0 1],'CameraViewAngle',1.3394,...
           'DataAspectRatio',[1 1 1],'Projection','perspective');
 
-robot = Drawing_arm(L1,L2,L3,L4);
+robot = Draw_Arm;
 pen = robotics.RigidBody('pen');
 penjnt = robotics.Joint('penjnt','fixed');
 dhparam = [0 0 -0.09 0]; % DH
 setFixedTransform(penjnt,dhparam,'dh');
 pen.Joint = penjnt;
-addBody(robot,pen,'endeffector');
+addBody(robot,pen,'target_link');
 robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
 lineobj = findobj('Type','Line');
 set(lineobj(1),'Visible','on');
@@ -134,7 +134,7 @@ for j=length(B2):-1:1
     ik = robotics.InverseKinematics('RigidBodyTree',robot);
     [Q,~] = ik('pen',tf,[1 1 0 1 1 1],Q);
     bJoint = arrayfun(@(x) x.JointPosition,Q)
-    robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
+    robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
     lineobj = findobj('Type','Line');
     set(lineobj(1),'Visible','on');
     figure(gcf);
@@ -145,7 +145,7 @@ for j=length(B2):-1:1
       pose = [eye(3) b(i,:)';
           zeros(1,3) 1;];
       [Q,~] = ik('pen',pose,[1 1 0 1 1 1],Q);
-      robot.show(Q,'preservePlot',false,'Frames','on','Parent',gca);
+      robot.show(Q,'preservePlot',false,'Frames','off','Parent',gca,'FastUpdate',1);
       lineobj = findobj('Type','Line');
       set(lineobj(1),'Visible','on');
       drawnow;

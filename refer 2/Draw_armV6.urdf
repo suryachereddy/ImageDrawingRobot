@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Draw_armV6">
+  <link
+    name="Plate">
+    <inertial>
+      <origin
+        xyz="0 0 0.005"
+        rpy="0 0 0" />
+      <mass
+        value="0.08" />
+      <inertia
+        ixx="6.7333E-05"
+        ixy="0"
+        ixz="0"
+        iyy="4.3333E-05"
+        iyz="0"
+        izz="0.00010933" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57075 0 0" />
+      <geometry>
+        <mesh
+          filename="Plate.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="Plate.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link
+    name="body1">
+    <inertial>
+      <origin
+        xyz="6.3163E-12 -0.0052654 0.031225"
+        rpy="-1.57075 0 0" />
+      <mass
+        value="0.2864" />
+      <inertia
+        ixx="0.00023048"
+        ixy="1.2713E-11"
+        ixz="1.2624E-11"
+        iyy="0.00022932"
+        iyz="4.0542E-05"
+        izz="0.00021662" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jnt1"
+    type="revolute">
+    <origin
+      xyz="0 -0.01 0"
+      rpy="0 0 0" />
+    <parent
+      link="Plate" />
+    <child
+      link="body1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="body2">
+    <inertial>
+      <origin
+        xyz="0.004964 0.00061652 0.11242"
+        rpy="0 0 0" />
+      <mass
+        value="0.22002" />
+      <inertia
+        ixx="0.00083034"
+        ixy="6.7301E-07"
+        ixz="-7.6532E-05"
+        iyy="0.00086126"
+        iyz="1.4783E-05"
+        izz="6.4517E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jnt2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.0625"
+      rpy="0 0 0" />
+    <parent
+      link="body1" />
+    <child
+      link="body2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.356"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="body3">
+    <inertial>
+      <origin
+        xyz="0.10503 1.4434E-09 8.2906E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.28429" />
+      <inertia
+        ixx="5.0421E-05"
+        ixy="1.4094E-10"
+        ixz="5.0094E-10"
+        iyy="0.0019051"
+        iyz="-3.8747E-10"
+        izz="0.0019053" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jnt3"
+    type="revolute">
+    <origin
+      xyz="0.05 0 0.1825"
+      rpy="0 0 0" />
+    <parent
+      link="body2" />
+    <child
+      link="body3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="body4">
+    <inertial>
+      <origin
+        xyz="0.013224 4.9278E-08 -0.0027725"
+        rpy="0 0 0" />
+      <mass
+        value="0.097782" />
+      <inertia
+        ixx="3.5709E-05"
+        ixy="-1.2624E-10"
+        ixz="9.9834E-06"
+        iyy="6.8188E-05"
+        iyz="2.8504E-11"
+        izz="5.3746E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="body4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jnt4"
+    type="revolute">
+    <origin
+      xyz="0.25 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="body3" />
+    <child
+      link="body4" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.927"
+      upper="0.785"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

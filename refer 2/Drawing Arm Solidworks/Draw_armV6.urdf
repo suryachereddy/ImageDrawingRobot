@@ -26,7 +26,7 @@
         rpy="1.57075 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/Plate.STL" />
+          filename="Plate.STL" />
       </geometry>
       <material
         name="">
@@ -40,7 +40,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/Plate.STL" />
+          filename="Plate.STL" />
       </geometry>
     </collision>
   </link>
@@ -67,7 +67,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body1.STL" />
+          filename="body1.STL" />
       </geometry>
       <material
         name="">
@@ -81,7 +81,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body1.STL" />
+          filename="body1.STL" />
       </geometry>
     </collision>
   </link>
@@ -125,7 +125,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body2.STL" />
+          filename="body2.STL" />
       </geometry>
       <material
         name="">
@@ -139,7 +139,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body2.STL" />
+          filename="body2.STL" />
       </geometry>
     </collision>
   </link>
@@ -156,8 +156,8 @@
     <axis
       xyz="0 1 0" />
     <limit
-      lower="-2.356"
-      upper="3.14"
+      lower="-1.5708"
+      upper="1.5708"
       effort="0"
       velocity="0" />
   </joint>
@@ -183,7 +183,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body3.STL" />
+          filename="body3.STL" />
       </geometry>
       <material
         name="">
@@ -197,7 +197,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body3.STL" />
+          filename="body3.STL" />
       </geometry>
     </collision>
   </link>
@@ -214,8 +214,8 @@
     <axis
       xyz="0 1 0" />
     <limit
-      lower="-3.14"
-      upper="3.14"
+      lower="-2.094"
+      upper="2.094"
       effort="0"
       velocity="0" />
   </joint>
@@ -241,7 +241,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body4.STL" />
+          filename="body4.STL" />
       </geometry>
       <material
         name="">
@@ -255,7 +255,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Draw_armV6/meshes/body4.STL" />
+          filename="body4.STL" />
       </geometry>
     </collision>
   </link>

@@ -1,0 +1,67 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="182421234" file="C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\Final APP\2D Image Drawing.prj" location="C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\Final APP" name="2D Image Drawing" target="target.mlapps" target-name="Package App">
+    <param.appname>2D Image Drawing</param.appname>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary />
+    <param.description />
+    <param.screenshot>C:\Users\surya\AppData\Local\Temp\tpa2f9b7f2_4fc3_4cc7_b07f_1878e04b7781.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>da7b9ebc-c844-4960-aa0c-604cd0902f36</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.summary />
+      <param.description />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\finalapp.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\refer 2\Draw_Arm.m</file>
+      <file>C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\refer 2\tracer.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot" name="Final APP" optional="false">C:\Users\surya\OneDrive\_MS RAS AI\2 Fall 2022\ImageDrawingRobot\Final APP</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2022a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
